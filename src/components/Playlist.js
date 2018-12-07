@@ -25,17 +25,23 @@ const calculatePlayTime = (tracks) => {
   return `${hours}:${minutes}:${seconds}`;
 }
 
-/* props is an array of tracks */
+/* props is a hash and we are dealting with 2
+    {side: "morn", tracks: Array(43)}
+    {side: "even", tracks: Array(43)}*/
+
 const Playlist = (props) => {
+  console.log("printing Playlist's props",props);
+
   const tracks = props.tracks;
   const trackCount = tracks.length;
   const playtime = calculatePlayTime(tracks);
   const trackElements = tracks.map((track, i) => {
     // We use "spread syntax" here to pass in all the properties of
     // the variable 'track' as props. Go look it up!
+    // consts track = {track: track.title, artist: track.artist, playtime: track.playtime, albumart: track.albumart}
     return (
       <Track
-        key={i}
+        key={`${track.title}${track.artist}`}
         {...track}
       />
     );
