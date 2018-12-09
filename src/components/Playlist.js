@@ -30,7 +30,7 @@ const calculatePlayTime = (tracks) => {
     {side: "even", tracks: Array(43)}*/
 
 const Playlist = (props) => {
-  console.log("printing Playlist's props",props);
+  console.log("printing Playlist's props",props.tracks[0]);
 
   const tracks = props.tracks;
   const trackCount = tracks.length;

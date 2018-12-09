@@ -5,8 +5,18 @@ import "./styles/Track.css";
 
 // Here we use destructuring to extract the props into separate variables
 // See https://wesbos.com/destructuring-objects/
+
+//if a button lives inside a nested component how does it propogate up to
+//where the data lives in playlist->radioset?
+
 const Track = ({title, artist, playtime, albumart, favorite}) => {
   console.log('what is favorite?', !favorite);
+
+  /*const onCheckAsFavorite = (event) => {
+    this.setState({
+
+    })
+  }*/
 
   return (
     <li className="track">
@@ -16,6 +26,7 @@ const Track = ({title, artist, playtime, albumart, favorite}) => {
         type="checkbox"
         className="track--favorite"
         checked={!favorite}
+        /*onChange={ this.onCheckAsFavorite }*/
       />
       <p className="track--artist">{artist}</p>
       <p className="track--playtime">{playtime}</p>
