@@ -16,9 +16,7 @@ class RadioSet extends React.Component {
 
 //while we're runing thru the logic we dont want prevstate to change
   moveTrackToOtherPlaylist = (track) => {
-    this.setState ((prevState, currentProps) => {
-
-      console.log("currentProps", currentProps);
+    this.setState (function(prevState, props) {
       let newArrayMorning = [];
       let newEveningArray = [];
       let tmp = {};
@@ -39,16 +37,16 @@ class RadioSet extends React.Component {
      newEveningArray = prevState.eveningTracks.filter(track2 => track2.title !== track);
      newArrayMorning = [tmp].concat([...prevState.morningTracks]);
     }
-    console.log("mroning ",newArrayMorning);
+    console.log("mroning ", newArrayMorning);
     console.log("evening ",newEveningArray);
 
       return {
-         morningTracks : newArrayMorning,
-         eveningTracks : newEveningArray
+         morningTracks: newArrayMorning,
+         eveningTracks: newEveningArray,
       };
     });
     console.log("test is this show ing?",this.state.morningTracks);
-
+    console.log("test is this show ing?",this.state.eveningTracks);
   }
 
 
