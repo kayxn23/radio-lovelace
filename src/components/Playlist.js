@@ -29,10 +29,33 @@ const calculatePlayTime = (tracks) => {
     {side: "morn", tracks: Array(43)}
     {side: "even", tracks: Array(43)}*/
 
-const Playlist = (props) => {
-  console.log("printing Playlist's props",props.tracks[0]);
+class Playlist extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const tracks = props.tracks;
+    this.state = {
+      tracks: this.props.tracks
+    }
+  }
+
+//custom sort
+//if x is the thing we're putting first put it first
+// if y is ... put it first
+//if neither is then leave them in the same spot
+//given track x and y which goes first
+
+  moveChildTrackToTop = (first) => {
+    console.log("before the sort",this.state.tracks);
+
+//if you're created a new state based on the previous state make sure we use the current previous state
+    this.setState(prevState => ({
+    tracks: [...prevState.tracks].sort(function(x,y){ return x.title === first ? -1 : y.title === first ? 1 : 0; })
+  }))
+}
+
+// data.sort(function(x,y){ return x == first ? -1 : y == first ? 1 : 0; });
+  render() {
+  const tracks = this.state.tracks;
   const trackCount = tracks.length;
   const playtime = calculatePlayTime(tracks);
   const trackElements = tracks.map((track, i) => {
@@ -43,13 +66,14 @@ const Playlist = (props) => {
       <Track
         key={`${track.title}${track.artist}`}
         {...track}
+        moveChildTrackToTop={this.moveChildTrackToTop}
       />
     );
   });
 
   return (
     <div className="playlist">
-      <h2>{props.side} Playlist</h2>
+      <h2>{this.props.side} Playlist</h2>
       <p>
         {trackCount} tracks - {playtime}
       </p>
@@ -59,6 +83,8 @@ const Playlist = (props) => {
     </div>
   );
 }
+};
+
 
 Playlist.propTypes = {
   tracks: PropTypes.array,

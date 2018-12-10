@@ -25,6 +25,11 @@ class Track extends React.Component {
     })
   }
 
+  moveTrackToTop = () => {
+    this.props.moveChildTrackToTop(this.props.title)
+  }
+
+
 
   render() {
 
@@ -42,6 +47,7 @@ class Track extends React.Component {
       <p className="track--playtime">{this.props.playtime}</p>
       <button
         className="track--control track--to-top"
+        onClick={ this.moveTrackToTop }
         >
         <span role="img" aria-label="send to top">🔝</span>
       </button>
@@ -63,6 +69,7 @@ Track.propTypes = {
   artist: PropTypes.string,
   playtime: PropTypes.string,
   albumart: PropTypes.string,
+  moveChildTrackToTop: PropTypes.func,
 }
 
 
