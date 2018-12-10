@@ -7,19 +7,15 @@ import songData from './data/tracks.json';
 
 songData.forEach((song, i) => {
   song.id = i;
-  song.favorite = false;
 });
 console.log('printing songData',songData);
 
 class App extends Component {
-  constructor() {
-    super();
 
-    this.state = {
-    }
-  }
 
   render() {
+    // const songData = this.state.songData;
+
     return (
       <div className="App">
         <header>

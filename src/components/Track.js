@@ -9,27 +9,37 @@ import "./styles/Track.css";
 //if a button lives inside a nested component how does it propogate up to
 //where the data lives in playlist->radioset?
 
-const Track = ({title, artist, playtime, albumart, favorite}) => {
-  console.log('what is favorite?', !favorite);
+class Track extends React.Component {
 
-  /*const onCheckAsFavorite = (event) => {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      favorite: false,
+    }
+  }
+
+  checkedAsFave = () => {
     this.setState({
-
+      favorite: !this.state.favorite
     })
-  }*/
+  }
 
-  return (
+
+  render() {
+
+    return(
     <li className="track">
-      <img className="track--albumart" alt={`album art for ${title}`} src={albumart} />
-      <h3 className="track--title">{title}</h3>
+      <img className="track--albumart" alt={`album art for ${this.props.title}`} src={this.props.albumart} />
+      <h3 className="track--title">{this.props.title}</h3>
       <input
         type="checkbox"
         className="track--favorite"
-        checked={!favorite}
-        /*onChange={ this.onCheckAsFavorite }*/
+        checked={!this.state.favorite}
+        onChange={ this.checkedAsFave }
       />
-      <p className="track--artist">{artist}</p>
-      <p className="track--playtime">{playtime}</p>
+      <p className="track--artist">{this.props.artist}</p>
+      <p className="track--playtime">{this.props.playtime}</p>
       <button
         className="track--control track--to-top"
         >
@@ -42,6 +52,10 @@ const Track = ({title, artist, playtime, albumart, favorite}) => {
       </button>
     </li>
   );
+
+
+  }
+
 };
 
 Track.propTypes = {
@@ -49,7 +63,13 @@ Track.propTypes = {
   artist: PropTypes.string,
   playtime: PropTypes.string,
   albumart: PropTypes.string,
-  favorite: PropTypes.bool,
 }
+
+
+
+
+
+
+
 
 export default Track;
