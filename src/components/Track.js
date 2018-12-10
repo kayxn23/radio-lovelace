@@ -29,6 +29,11 @@ class Track extends React.Component {
     this.props.moveChildTrackToTop(this.props.title)
   }
 
+  //move to other playlist func
+  moveToOtherPlaylist = () => {
+    this.props.moveChildTrackToOtherPlaylist(this.props.title)
+  }
+
 
 
   render() {
@@ -53,6 +58,8 @@ class Track extends React.Component {
       </button>
       <button
         className="track--control track--switch"
+        onClick={ this.moveToOtherPlaylist }
+
         >
         <span role="img" aria-label="switch lists">↔</span>
       </button>
@@ -70,6 +77,7 @@ Track.propTypes = {
   playtime: PropTypes.string,
   albumart: PropTypes.string,
   moveChildTrackToTop: PropTypes.func,
+  moveChildTrackToOtherPlaylist: PropTypes.func
 }
 
 

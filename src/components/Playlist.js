@@ -44,6 +44,11 @@ class Playlist extends React.Component {
 //if neither is then leave them in the same spot
 //given track x and y which goes first
 
+  moveChildTrackToOtherPlaylist = (track) => {
+    console.log("this is the track?", track);
+    this.props.moveToOtherPlaylistMaster(track);
+  }
+
   moveChildTrackToTop = (first) => {
     console.log("before the sort",this.state.tracks);
 
@@ -67,6 +72,7 @@ class Playlist extends React.Component {
         key={`${track.title}${track.artist}`}
         {...track}
         moveChildTrackToTop={this.moveChildTrackToTop}
+        moveChildTrackToOtherPlaylist={this.moveChildTrackToOtherPlaylist}
       />
     );
   });
@@ -89,6 +95,7 @@ class Playlist extends React.Component {
 Playlist.propTypes = {
   tracks: PropTypes.array,
   side: PropTypes.string,
+  moveToOtherPlaylistMaster: PropTypes.func
 }
 
 export default Playlist;

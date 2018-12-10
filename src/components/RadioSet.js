@@ -4,31 +4,39 @@ import "./styles/RadioSet.css";
 import Playlist from './Playlist';
 
 /* props is the song data*/
-const RadioSet = (props) => {
-  console.log(`Radio set for ${props.tracks.length} tracks`);
-  const playlists = {
-    morningTracks: props.tracks.slice(0, props.tracks.length / 2),
-    eveningTracks: props.tracks.slice(props.tracks.length / 2, props.tracks.length)
-  };
-  console.log("printing playlists.morningTracks",playlists.morningTracks);
-  /*playlists.morningTracks [{title: xx, artist: xx ....}, {title: xx, artist: xx ....}]*/
+class RadioSet extends React.Component {
+  constructor(props) {
+    super(props);
 
-  /* const playlists = this.state.playlists; */
+    this.state = {
+        morningTracks: props.tracks.slice(0, props.tracks.length / 2),
+        eveningTracks: props.tracks.slice(props.tracks.length / 2, props.tracks.length)
+    }
+  }
 
+  moveTrackToOtherPlaylist = (track) => {
+    console.log("test print track from Radioset", track );
+  }
+
+  render() {
   return (
     <div className="radio-set">
       <section className="radio-set--playlist-container">
         <Playlist
           side="Morning"
-          tracks={playlists.morningTracks}
+          tracks={this.state.morningTracks}
+          moveToOtherPlaylistMaster={this.moveTrackToOtherPlaylist}
         />
         <Playlist
           side="Evening"
-          tracks={playlists.eveningTracks}
+          tracks={this.state.eveningTracks}
+          moveToOtherPlaylistMaster={this.moveTrackToOtherPlaylist}
         />
       </section>
     </div>
   );
 };
+}
+
 
 export default RadioSet;
